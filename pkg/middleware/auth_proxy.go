@@ -29,7 +29,7 @@ func initContextWithAuthProxy(ctx *m.ReqContext, orgID int64) bool {
 	}
 
 	// if auth proxy ip(s) defined, check if request comes from one of those
-	if err := checkAuthenticationProxy(ctx.Req.RemoteAddr, proxyHeaderValue); err != nil {
+	if err := checkAuthenticationProxy(ctx.RemoteAddr(), proxyHeaderValue); err != nil {
 		ctx.Handle(407, "Proxy authentication required", err)
 		return true
 	}
